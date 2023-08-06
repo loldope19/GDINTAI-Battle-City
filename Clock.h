@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML\Graphics.hpp>
-#include <SFML\System.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include <string>
  // #define SFML_NO_DEPRECATED_WARNINGS
 
