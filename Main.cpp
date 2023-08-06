@@ -1,11 +1,34 @@
-#include "game.h"
-#include "sound.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <array>
+#include <list>
+#include <map>
+#include <memory>
+#include <unordered_map>
+#include <windows.h>
+#include <tchar.h>
+#include <math.h>
 
-Sound sound;
+#include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
+#include "SFML/Audio.hpp"
 
-int main(){
-	Game MyGame;
-	MyGame.runGame();
+#include "Controller/Game.cpp"
+#include "Controller/Collisionable.cpp"
 
-	return EXIT_SUCCESS;
+#include "Model/Clock.cpp"
+#include "Model/Map.cpp"
+
+#include "View/Block.cpp"
+#include "View/Sound.cpp"
+#include "View/Sprite.cpp"
+
+Sound cSound;
+
+int main() {
+   Game CGame;
+   CGame.runGame();
+
+   return 0;
 }
