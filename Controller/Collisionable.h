@@ -12,18 +12,19 @@
 const float PlayerSpeed = 0.033f;
 const float EnemySpeed = 0.04f;
 const float BulletSpeed = 0.015f;
-
+/*
 class Tank;
 class Bullet;
 class Map;
 class Sprite;
+*/
 
 typedef std::unique_ptr<Tank> TankPtr;
 
 namespace controllers {
     class Collisionable {
         public:
-            Sprite& cSprite;        // Stores Sprites
+            GameSprite& cSprite;        // Stores Sprites
             Map& cMap;              // Stores Map
 
             enum class Move : int {LEFT, RIGHT, UP, DOWN, NONE};
@@ -45,7 +46,7 @@ namespace controllers {
             const bool bPlayer;
 
         public:
-            Collisionable(Sprite& cSprite, Map& cMap, bool bPlayer, int ID, Move cMove);
+            Collisionable(GameSprite& cSprite, Map& cMap, bool bPlayer, int ID, Move cMove);
             virtual ~Collisionable(void);
         
         public:

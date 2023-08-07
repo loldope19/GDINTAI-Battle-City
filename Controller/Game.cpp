@@ -15,7 +15,7 @@ Game::Game(void) : cMap {cSprite, cFPSClock, rwWindow}, cFPSClock {font} {
         std::cout << "[ERROR] Image not Found!" << std::endl;
 		return;
     }
-    if (!font.loadFromFile("data/joystix monospace.ttf")) {     //CHANGE LOCATION LATER
+    if (!font.loadFromFile("../View/Font/joystix monospace.ttf")) {     //CHANGE LOCATION LATER
         std::cout << "[ERROR] Font not Found!" << std::endl;
 		return;
     }
@@ -58,7 +58,7 @@ void Game::menu() {
     const int n {3};
     sf::Text sText[n];
     sf::String strOptions[] {"1 Player", "2 Player", "Exit"};
-    sf::Sprite cMenuStone = cSprite.stoneBig;
+    sf::Sprite cMenuStone = cSprite.bigStoneSprite;
 
     for (int i = 0; i < n; i++) {
         sText[i].setFont(font);
@@ -68,7 +68,7 @@ void Game::menu() {
                              float(rwWindow.getSize().y / 2.5 + i * rwWindow.getSize().y / 6.4));
     }
 
-    cSprite.tankSprite.setScale(float(cMap.pr.scale * 1.5), float(cMap.pr.scale * 1.5));
+    cSprite.tankSprite.setScale(float(cMap.sScreen.nScale * 1.5), float(cMap.sScreen.nScale * 1.5));
 
     cIcon = GameState::SINGLEPLAYERGAME;
 
@@ -89,21 +89,21 @@ void Game::menu() {
         rwWindow.clear();
 
         for (int y = 0; y < 15; y++) {
-            for (int x = 0; x < cMap.pr.widthInBlocks / 2; x++) {
-                if (x == 0 || y == 0 || x == cMap.pr.widthInBlocks / 2 - 1 || y == 14) {
-                    cMenuStone.setScale(cMap.pr.scale, cMap.pr.scale);
-                    cMenuStone.setPosition(float(cMap.pr.sides + x  * (cMap.pr.blockSize * 2)), float(cMap.pr.topBot + y * (cMap.pr.blockSize * 2)));
+            for (int x = 0; x < cMap.sScreen.nWidthinBlocks / 2; x++) {
+                if (x == 0 || y == 0 || x == cMap.sScreen.nWidthinBlocks / 2 - 1 || y == 14) {
+                    cMenuStone.setScale(cMap.sScreen.nScale, cMap.sScreen.nScale);
+                    cMenuStone.setPosition(float(cMap.sScreen.nSides + x  * (cMap.sScreen.nBlockSize * 2)), float(cMap.sScreen.topBot + y * (cMap.sScreen.nBlockSize * 2)));
                     rwWindow.draw(cMenuStone);
                 }
             }   
         }
 
-        cSprite.bgSprite.setPosition(float(std::round(cMap.pr.widthInBlocks / 8) * cMap.pr.blockSize + cMap.pr.sides), float(4 * cMap.pr.blockSize + cMap.pr.topBot));
-		cSprite.bgSprite.setScale(cMap.pr.scale  *0.8, cMap.pr.scale  *0.8);
+        cSprite.bgSprite.setPosition(float(std::round(cMap.sScreen.nWidthinBlocks / 8) * cMap.sScreen.nBlockSize + cMap.sScreen.nSides), float(4 * cMap.sScreen.nWidthinBlocks + cMap.sScreen.topBot));
+		cSprite.bgSprite.setScale(cMap.sScreen.nScale * 0.8, cMap.sScreen.nScale * 0.8);
 		rwWindow.draw(cSprite.bgSprite);
 
         cSprite.controlSprite.setPosition(1050, 780);
-        cSprite.controlSprite.setScale(cMap.pr.scale * 1.2, cMap.pr.scale * 1.2);
+        cSprite.controlSprite.setScale(cMap.sScreen.nScale * 1.2, cMap.sScreen.nScale * 1.2);
         rwWindow.draw(cSprite.controlSprite);
         rwWindow.draw(cSprite.tankSprite);
 
@@ -168,7 +168,7 @@ void Game::eventsMenu() {
 		}
 		else if (eEvent.type == sf::Event::KeyPressed && 
                  eEvent.key.code == sf::Keyboard::T){
-			cFPSClock.switchClock();
+			cFPSClock.toggleClock();
 		}
     }
 }

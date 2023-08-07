@@ -23,7 +23,7 @@ namespace controllers {
             GameState cIcon;
             GameState cState;
 
-            Sprite cSprite;
+            GameSprite cSprite;
             Map cMap;
 
             sf::Font font;

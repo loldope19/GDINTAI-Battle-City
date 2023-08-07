@@ -19,6 +19,8 @@
 
 #include "Model/Clock.cpp"
 #include "Model/Map.cpp"
+#include "Model/Single.cpp"
+#include "Model/Tank.cpp"
 
 #include "View/Block.cpp"
 #include "View/Sound.cpp"

@@ -50,7 +50,7 @@ void Sound::updateSound(std::list<TankPtr>& tanks) {
     bool bIsMoving = false;
 
     for (auto& tank : tanks) {
-        if (tank->move != Tank::Move::none) {
+        if (tank->move != Tank::Move::NONE) {
             bIsMoving = true;
             break;
         }

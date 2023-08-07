@@ -11,15 +11,13 @@ const int Hardness0 = 0;
 const int Hardness1 = 1;
 const int Hardness3 = 3;
 
-class Map;
-
 namespace views {
     class Block {
         private:
             int nHardness = Hardness0;
-            sf::Sprite cImg;
-
+            
         public:
+            sf::Sprite cImg;
             bool bHide = false;
             enum class Type {
                 AIR, BRICK, STONE, GREEN, WATER, ENDMAP, EAGLE, EAGLE_DEAD
@@ -33,10 +31,10 @@ namespace views {
                 POS1, POS2, POS3, POS4
             } pos;
 
-            void setImg(Sprite& cSprite);
+            void setImg(GameSprite& cSprite);
             void setHardness();
             void setMoveMode();
-            void shotBlock(Sprite& cSprite);
+            void shotBlock(GameSprite& cSprite);
             void shotEagle(Map& cMap);
     };
 }

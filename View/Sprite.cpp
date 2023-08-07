@@ -2,18 +2,20 @@
 
 using namespace views;
 
-Sprite::Sprite(void) {
+GameSprite::GameSprite() {
     bLoaded = false;
     this->loadTextures();
     bLoaded = true;
     this->loadSprites();
 }
 
-bool Sprite::isGood() {
+GameSprite::~GameSprite() {}
+
+bool GameSprite::isGood() {
     return this->bLoaded;
 }
 
-void Sprite::loadTextures() {
+void GameSprite::loadTextures() {
     airTexture.loadFromFile("Image/Blocks/airTx.png");
     brickTexture.loadFromFile("Image/Blocks/brickTx.gif");
     stoneTexture.loadFromFile("Image/Blocks/stoneTx.gif");
@@ -37,7 +39,7 @@ void Sprite::loadTextures() {
     explosionTex.loadFromFile("Image/explosionTx.gif");
 }
 
-void Sprite::loadSprites() {
+void GameSprite::loadSprites() {
     airSprite.setTexture(airTexture);
     brickSprite.setTexture(brickTexture);
     stoneSprite.setTexture(stoneTexture);

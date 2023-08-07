@@ -2,18 +2,19 @@
 #define MODEL_MAP_H
 
 #include "Clock.h"
-//#include "Macro.h"
+#include "../Macro.h"
 
 #include "../View/Sprite.h"
 #include "../View/Block.h"
-//#include "Tank.h"
+#include "../View/Sound.h"
+
+#include "Tank.h"
 //#include "Bullet.h"
 //#include "Explosion.h"
 
 //#include "Player1.h"
 //#include "Player2.h"
 //#include "Enemy.h"
-//#include "Sound.h"
 
 const int nBlockSize = 30;
 
@@ -68,7 +69,7 @@ namespace models {
         public:
             Window sScreen;
             BlockTab cTab;
-            Sprite& cSprite;
+            GameSprite& cSprite;
             Timer& cGameClock;
             sf::RenderWindow& rwWindow;
             Level sLevel;
@@ -98,7 +99,7 @@ namespace models {
             };
 
         public:
-            Map(Sprite& pSprite, Timer& cFPSClock, sf::RenderWindow& rwWindow);
+            Map(GameSprite& pSprite, Timer& cFPSClock, sf::RenderWindow& rwWindow);
             ~Map();
 
         public: 

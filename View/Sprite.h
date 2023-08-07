@@ -2,7 +2,7 @@
 #define VIEW_SPRITE_H
 
 namespace views {
-    class Sprite {
+    class GameSprite {
         public:
             // Block Textures
             sf::Texture airTexture;
@@ -65,9 +65,11 @@ namespace views {
             bool bLoaded;
 
         public:
-            Sprite(void);
-            bool isGood();
+            GameSprite();
+            ~GameSprite();
 
+        public:
+            bool isGood();
             void loadTextures();
             void loadSprites();
     };

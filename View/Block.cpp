@@ -2,7 +2,7 @@
 
 using namespace views;
 
-void Block::setImg(Sprite& cSprite) {
+void Block::setImg(GameSprite& cSprite) {
     switch (type) {
         case Block::Type::AIR:
             cImg = cSprite.airSprite;
@@ -78,7 +78,7 @@ void Block::setMoveMode() {
     }
 }
 
-void Block::shotBlock(Sprite& cSprite) {
+void Block::shotBlock(GameSprite& cSprite) {
     if (nHardness > 0) {
         nHardness--;
     }
@@ -93,14 +93,14 @@ void Block::shotEagle(Map& cMap) {
 
     for (int x = 0; x < 2; x++) {
         for (int y = 0; y < 2; y++) {
-            position = cMap.tab[26 + y][14 + x].cImg.getPosition();
-			cMap.tab[26 + y][14 + x].cImg = cMap.spr.EagleDead;
-			cMap.tab[26 + y][14 + x].cImg.setTextureRect(sf::IntRect(x * 50, y * 50, 100, 100));
-			cMap.tab[26 + y][14 + x].cImg.setPosition(position);
-			cMap.tab[26 + y][14 + x].cImg.setScale(cMap.pr.scale, cMap.pr.scale);
-			cMap.tab[26 + y][14 + x].move = Block::Move::NOT_MOVEABLE;
-			cMap.tab[26 + y][14 + x].type = Block::Type::EAGLE_DEAD;
-			cMap.tab[26 + y][14 + x].setHardness();
+            position = cMap.cTab[26 + y][14 + x].cImg.getPosition();
+			cMap.cTab[26 + y][14 + x].cImg = cMap.cSprite.baseDedSprite;
+			cMap.cTab[26 + y][14 + x].cImg.setTextureRect(sf::IntRect(x * 50, y * 50, 100, 100));
+			cMap.cTab[26 + y][14 + x].cImg.setPosition(position);
+			cMap.cTab[26 + y][14 + x].cImg.setScale(cMap.sScreen.nScale, cMap.sScreen.nScale);
+			cMap.cTab[26 + y][14 + x].move = Block::Move::NOT_MOVEABLE;
+			cMap.cTab[26 + y][14 + x].type = Block::Type::EAGLE_DEAD;
+			cMap.cTab[26 + y][14 + x].setHardness();
         }
     }
 }

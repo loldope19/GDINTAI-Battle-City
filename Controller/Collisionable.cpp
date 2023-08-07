@@ -1,7 +1,9 @@
 #include "Collisionable.h"
 
-Collisionable::Collisionable(Sprite& cSprite, Map& cMap, bool bPlayer, int ID, Move cMove) :
-    bExists(true), sSprite(cSprite), cMap(cMap), bPlayer(bPlayer), cMove(cMove) {}
+using namespace controllers;
+
+Collisionable::Collisionable(GameSprite& cSprite, Map& cMap, bool bPlayer, int ID, Move cMove) :
+    bExists(true), cSprite(cSprite), cMap(cMap), bPlayer(bPlayer), objID(ID) {}
 
 Collisionable::~Collisionable(void) {}
 

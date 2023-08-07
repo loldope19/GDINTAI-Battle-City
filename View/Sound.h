@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <map>
 #include <SFML\Audio.hpp>
-//#include "Tank.h"
+#include "../Model/Tank.h"
 
 typedef std::unordered_map<std::string, sf::Sound> SoundMap;
 
