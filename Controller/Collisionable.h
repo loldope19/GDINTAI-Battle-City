@@ -8,17 +8,14 @@
 #include "../Macro.h"
 #include "../View/Sprite.h"
 #include "../Model/Map.h"
+#include "../Model/Tank.h"
 
 const float PlayerSpeed = 0.033f;
 const float EnemySpeed = 0.04f;
 const float BulletSpeed = 0.015f;
 
 namespace controllers {
-    class Tank;
-    class Bullet;
-    class Map;
-    class GameSprite;
-
+    using namespace models;
     typedef std::unique_ptr<Tank> TankPtr;
 
     class Collisionable {

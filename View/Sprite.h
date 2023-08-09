@@ -1,6 +1,8 @@
 #ifndef VIEW_SPRITE_H
 #define VIEW_SPRITE_H
 
+#include "SFML/Graphics.hpp"
+
 namespace views {
     class GameSprite {
         public:

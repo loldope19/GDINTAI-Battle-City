@@ -1,20 +1,22 @@
 #ifndef MODEL_MAP_H
 #define MODEL_MAP_H
 
+#include <fstream>
+
 #include "Clock.h"
 #include "../Macro.h"
 
 #include "../View/Sprite.h"
 #include "../View/Block.h"
 #include "../View/Sound.h"
+#include "../View/Explosion.h"
 
 #include "Tank.h"
-//#include "Bullet.h"
-//#include "Explosion.h"
+#include "Bullet.h"
+#include "Enemy.h"
 
-//#include "Player1.h"
-//#include "Player2.h"
-//#include "Enemy.h"
+#include "../Controller/Player1.h"
+#include "../Controller/Player2.h"
 
 const int nBlockSize = 30;
 
@@ -35,7 +37,7 @@ struct Level {
         LEFT,
         MID,
         RIGHT
-    };
+    } actualPos;
 
     std::list<TankPtr> Tanks;
     std::list<Bullet> Bullets;

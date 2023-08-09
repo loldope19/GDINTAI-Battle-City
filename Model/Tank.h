@@ -12,8 +12,8 @@
 const int nPlayerLives = 3;
 
 namespace models {
-    class Explosion;
-
+    using namespace controllers;
+    using namespace views;
     class Tank : public sf::Drawable, public Collisionable {
         private:
             std::list<Explosion>& Explosions;

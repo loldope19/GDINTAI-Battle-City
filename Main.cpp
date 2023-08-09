@@ -14,11 +14,12 @@
 #include "SFML/System.hpp"
 #include "SFML/Audio.hpp"
 
-#include "Controller/Game.cpp"
 #include "Controller/Collisionable.cpp"
-
+#include "Controller/Game.cpp"
+/*
 #include "Model/Bullet.cpp"
 #include "Model/Clock.cpp"
+#include "Model/Enemy.cpp"
 #include "Model/Map.cpp"
 #include "Model/Single.cpp"
 #include "Model/Tank.cpp"
@@ -27,7 +28,7 @@
 #include "View/Explosion.cpp"
 #include "View/Sound.cpp"
 #include "View/Sprite.cpp"
-
+*/
 Sound cSound;
 
 int main() {

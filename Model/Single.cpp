@@ -29,7 +29,7 @@ void Single::runSingle() {
                 Tank->checkCollision(cMap.cLevel.Tanks, cMap.cLevel.Bullets);
             }
             for (auto& Bullet : cMap.cLevel.Bullets) {
-                Bullet->checkCollision(cMap.cLevel.Tanks, cMap.cLevel.Bullets);
+                Bullet.checkCollision(cMap.cLevel.Tanks, cMap.cLevel.Bullets);
             }
 
             clearDeadObjects();
@@ -62,7 +62,7 @@ void Single::runSingle() {
 
 void Single::clearDeadObjects() {
     for (auto Bullet : cMap.cLevel.Bullets) {
-        if (Bullet.exist == false) {
+        if (Bullet.bExists == false) {
             for (auto& Tank : cMap.cLevel.Tanks) {
                 if (Bullet.objID == Tank->objID) {
                     Tank->canShoot = true;
@@ -75,7 +75,7 @@ void Single::clearDeadObjects() {
     BACK:
 
     for (auto i = cMap.cLevel.Bullets.begin(); i != cMap.cLevel.Bullets.end(); i++) {
-        if (i->exist == false) {
+        if (i->bExists == false) {
             cMap.cLevel.Bullets.erase(i);
             goto BACK;
         }

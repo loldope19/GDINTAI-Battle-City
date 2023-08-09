@@ -14,7 +14,7 @@ const int Hardness3 = 3;
 namespace views {
     class Block {
         private:
-            int nHardness = Hardness0;
+            int nHardness = 0;
             
         public:
             sf::Sprite cImg;

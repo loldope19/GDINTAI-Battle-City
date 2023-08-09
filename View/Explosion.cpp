@@ -2,7 +2,7 @@
 
 using namespace views;      // No idea why this doesn't work--
 
-views::Explosion::Explosion(Map& cMap, Tank& cTank) {
+Explosion::Explosion(Map& cMap, Tank& cTank) {
     if (!cTank.bPlayer)
         cMap.nDestroyedEnemy += 1;
     
@@ -16,9 +16,9 @@ views::Explosion::Explosion(Map& cMap, Tank& cTank) {
     cSound.Sounds["explosion"].play();
 }
 
-views::Explosion::~Explosion() {}
+Explosion::~Explosion() {}
 
-void views::Explosion::update() {
+void Explosion::update() {
     if (cTimer.getElapsedTime().asSeconds() >= 0.4) {
         if (nImgNum < 2)
             nImgNum++;
@@ -28,7 +28,7 @@ void views::Explosion::update() {
     }
 }
 
-bool views::Explosion::stillExist() {
+bool Explosion::stillExist() {
     if (cSound.Sounds["explosion"].getStatus() == sf::Sound::Status:: Playing) {
         this->update();
         return true;
@@ -37,6 +37,6 @@ bool views::Explosion::stillExist() {
         return false;
 }
 
-void views::Explosion::draw(sf::RenderTarget& rtWindow, sf::RenderStates) const {
+void Explosion::draw(sf::RenderTarget& rtWindow, sf::RenderStates) const {
     rtWindow.draw(cImg);
 }

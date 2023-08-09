@@ -9,6 +9,7 @@
 typedef std::unordered_map<std::string, sf::Sound> SoundMap;
 
 namespace views {
+    using namespace controllers;
     class Sound {
         private:
             std::map<int, sf::SoundBuffer> buffer;

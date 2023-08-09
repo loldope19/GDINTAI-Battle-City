@@ -1,13 +1,15 @@
 #ifndef VIEW_EXPLOSION_H
 #define VIEW_EXPLOSION_H
 
+#include "SFML/Graphics.hpp"
+
 #include "../Model/Map.h"
 #include "../Model/Tank.h"
 #include "../Macro.h"
 #include "Sound.h"
-#include "SFML/Graphics.hpp"
 
 namespace views {
+    //using namespace models;
     extern Sound sound;
 
     class Explosion : public sf::Drawable {

@@ -20,7 +20,15 @@ namespace models {
         public:
             void setStartPos(sf::Vector2f vecPosition);
             virtual bool collision(Pos PosMap, sf::FloatRect& sRect) final;
+            virtual bool collideWithTanks(std::list<TankPtr>&, std::list<Bullet>&, float) final;
+            virtual void checkCollision(std::list<TankPtr>&, std::list<Bullet>&) override;
 
+            virtual void updateImage();
+
+            bool collideWithBullets(std::list<Bullet>&, sf::FloatRect&);
+
+        private:
+            virtual void draw(sf::RenderTarget& rtWindow, sf::RenderStates rsStates) const;
         
     };
 }

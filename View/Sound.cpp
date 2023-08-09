@@ -59,7 +59,7 @@ void Sound::updateSound(std::list<TankPtr>& tanks) {
     if (bIsMoving) {
         if (Sounds["move"].getStatus() != sf::Sound::Status::Playing) {
             Sounds["tank"].stop();
-				Sounds["move"].play();
+			Sounds["move"].play();
         }
     }
     else{
