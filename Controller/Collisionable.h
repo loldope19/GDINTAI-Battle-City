@@ -4,24 +4,23 @@
 #include <SFML\Graphics.hpp>
 #include <list>
 #include <memory>
-#include "../Macro.h"
 
+#include "../Macro.h"
 #include "../View/Sprite.h"
 #include "../Model/Map.h"
 
 const float PlayerSpeed = 0.033f;
 const float EnemySpeed = 0.04f;
 const float BulletSpeed = 0.015f;
-/*
-class Tank;
-class Bullet;
-class Map;
-class Sprite;
-*/
-
-typedef std::unique_ptr<Tank> TankPtr;
 
 namespace controllers {
+    class Tank;
+    class Bullet;
+    class Map;
+    class GameSprite;
+
+    typedef std::unique_ptr<Tank> TankPtr;
+
     class Collisionable {
         public:
             GameSprite& cSprite;        // Stores Sprites

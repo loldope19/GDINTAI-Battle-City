@@ -7,13 +7,13 @@
 
 #include "../View/Sprite.h"
 #include "../View/Block.h"
-//#include "Explosion.h"
+#include "../View/Explosion.h"
 
 const int nPlayerLives = 3;
 
-class Explosion;
-
 namespace models {
+    class Explosion;
+
     class Tank : public sf::Drawable, public Collisionable {
         private:
             std::list<Explosion>& Explosions;

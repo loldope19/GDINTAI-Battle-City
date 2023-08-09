@@ -9,7 +9,7 @@ Tank::Tank(std::list<Explosion>& Explosions, std::list<Bullet> Bullets, GameSpri
 
 Tank::~Tank(void) {
     if (bExists == false)
-        Explosions.push_back(Explosion(cMap, *this));
+        Explosions.push_back(new Explosion(cMap, *this));
 }
 
 void Tank::draw(sf::RenderTarget& rtWindow, sf::RenderStates rStates) const {

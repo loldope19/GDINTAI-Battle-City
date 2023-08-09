@@ -72,7 +72,7 @@ namespace models {
             GameSprite& cSprite;
             Timer& cGameClock;
             sf::RenderWindow& rwWindow;
-            Level sLevel;
+            Level cLevel;
             int nDestroyedEnemy = 0;
 
             enum class Set {
@@ -95,7 +95,7 @@ namespace models {
                 GAME,
                 NEXT_LEVEL,
                 GAME_OVER,
-                EXIT
+                EXIT    
             };
 
         public:
@@ -116,7 +116,7 @@ namespace models {
             void events(Timer&);
             bool gameGood();
             bool checkGameStatus();
-            void initiateGame();
+            void initiateGame(bool bGameType);
             void endGame();
             void setEagle();
             bool checkEagleAlive();

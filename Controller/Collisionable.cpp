@@ -2,8 +2,11 @@
 
 using namespace controllers;
 
-Collisionable::Collisionable(GameSprite& cSprite, Map& cMap, bool bPlayer, int ID, Move cMove) :
-    bExists(true), cSprite(cSprite), cMap(cMap), bPlayer(bPlayer), objID(ID) {}
+Collisionable::Collisionable(GameSprite& cSprite, Map& cMap, bool bPlayer, int ID, Move cMove)
+    : cSprite(cSprite), cMap(cMap), bPlayer(bPlayer), objID(ID), cMove(cMove)
+{
+    this->bExists = true;
+}
 
 Collisionable::~Collisionable(void) {}
 

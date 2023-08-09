@@ -3,7 +3,7 @@
 
 #include "../Model/Clock.h"
 #include "../Model/Map.h"
-//#include "Single.h"
+#include "../Model/Single.h"
 #include "../View/Sprite.h"
 #include "../View/Block.h"
 

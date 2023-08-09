@@ -17,12 +17,14 @@
 #include "Controller/Game.cpp"
 #include "Controller/Collisionable.cpp"
 
+#include "Model/Bullet.cpp"
 #include "Model/Clock.cpp"
 #include "Model/Map.cpp"
 #include "Model/Single.cpp"
 #include "Model/Tank.cpp"
 
 #include "View/Block.cpp"
+#include "View/Explosion.cpp"
 #include "View/Sound.cpp"
 #include "View/Sprite.cpp"
 
