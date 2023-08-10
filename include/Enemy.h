@@ -3,6 +3,7 @@
 
 class Enemy : public Tank {
 private:
+    int nHealth, nKills;
     float timeBeforeMoving;
     float timeBeforeShot;
 

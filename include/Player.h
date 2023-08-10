@@ -3,6 +3,10 @@
 #include "Tank.h"
 
 class Player : public Tank {
+private:
+    int nHealth;
+    int nKills;
+
 public:
     Player();
 

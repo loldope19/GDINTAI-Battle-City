@@ -1,6 +1,5 @@
 //#include <SFML/Window/Event.hpp>
-#include <SFML\Window.hpp>
-#include <SFML\Graphics.hpp>
+
 #include <iostream>
 #include "../include/Application.h"
 
@@ -11,7 +10,27 @@ Application::Application()
 
     sf::Clock clock;
 
-    packOfEnemies = new Enemy[4]{ Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };
+    packOfEnemies = new Enemy[1]{ /*Enemy(52,31),*/ Enemy(147,391)/*, Enemy(532,391), Enemy(628,31) */};
+
+    // PLAYER BASES
+    mBase = new Base(336, 600, Base::BaseType::PLAYER);
+    vecBase.push_back(mBase);
+
+    mBase = new Base(48, 384, Base::BaseType::PLAYER);
+    vecBase.push_back(mBase);
+
+    mBase = new Base(528, 504, Base::BaseType::PLAYER);
+    vecBase.push_back(mBase);    
+
+    // ENEMY BASES
+    mBase = new Base(336, 24, Base::BaseType::ENEMY);
+    vecBase.push_back(mBase);
+
+    mBase = new Base(624, 288, Base::BaseType::ENEMY);
+    vecBase.push_back(mBase);
+
+    mBase = new Base(144, 120, Base::BaseType::ENEMY);
+    vecBase.push_back(mBase);
 
     while (mWindow.isOpen()) {
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
@@ -41,7 +60,7 @@ void Application::process_events() {
 }
 
 void Application::update(const sf::Int64 &time) {
-    for (int i(0); i < 4; ++i)
+    for (int i(0); i < 1; ++i)
         if (!packOfEnemies[i].life)
             ++frags;
         else {
@@ -56,7 +75,7 @@ void Application::update(const sf::Int64 &time) {
         gameOver = true;
 
     bool collision;
-    for (int i(0); i < 4; ++i) {
+    for (int i(0); i < 1; ++i) {
         collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
         if (collision)
             break;
@@ -65,7 +84,7 @@ void Application::update(const sf::Int64 &time) {
     if (mPlayer.life)
         mPlayer.update(time, map, collision);
 
-    for (int i(0); i < 4; ++i) {
+    for (int i(0); i < 1; ++i) {
         if (packOfEnemies[i].life) {
             packOfEnemies[i].update(time, map, collision);
 
@@ -75,11 +94,14 @@ void Application::update(const sf::Int64 &time) {
                 packOfEnemies[i].bullet.present = false;
             }
 
-            if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
-                && packOfEnemies[i].bullet.present) {
-                mBase.life = false;
-                gameOver = true;
+            for (Base* cBase : vecBase) {
+                if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
+                    && packOfEnemies[i].bullet.present && cBase->bType == Base::BaseType::PLAYER) {
+                    cBase->life = false;
+                    gameOver = true;
+                }
             }
+
             if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())
                 && mPlayer.bullet.present) {
                 packOfEnemies[i].collapse();
@@ -88,11 +110,14 @@ void Application::update(const sf::Int64 &time) {
         }
     }
 
-    if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
-        && mPlayer.bullet.present) {
-        mBase.life = false;
-        gameOver = true;
+    for (Base* cBase : vecBase) {
+        if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
+            && mPlayer.bullet.present && cBase->bType == Base::BaseType::ENEMY) {
+            cBase->life = false;
+            gameOver = true;
+        }
     }
+    
 }
 
 void Application::render() {
@@ -103,7 +128,7 @@ void Application::render() {
         mWindow.draw(mPlayer.mSprite);
     if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);
 
-    for (int i(0); i < 4; ++i) {
+    for (int i(0); i < 1; ++i) {
         if (packOfEnemies[i].bullet.present)
             mWindow.draw(packOfEnemies[i].bullet.mSprite);
 
@@ -111,18 +136,20 @@ void Application::render() {
             mWindow.draw(packOfEnemies[i].mSprite);
     }
 
-    if (mBase.life)
-        mWindow.draw(mBase.mSprite);
+    for (Base* cBase : vecBase) {
+        if (cBase->life)
+            mWindow.draw(cBase->mSprite);
+    }
 
     if (!gameStarted)
         msgStart.print(mWindow);
 
     if (gameOver) {
         msgOver.print(mWindow);
-        if (!mBase.life || !mPlayer.life)
+        //if (!mBase.life || !mPlayer.life)
 
-            msgLost.print(mWindow);
-        else
+        //    msgLost.print(mWindow);
+        //else
             msgWon.print(mWindow);
     }
 

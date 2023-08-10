@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include <SFML/Window.hpp>
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -14,7 +15,8 @@ private:
     int frags;
 
     sf::RenderWindow mWindow;
-    Base mBase;
+    std::vector<Base*> vecBase;
+    Base* mBase;
     Map map;
     Player mPlayer;
     Enemy *packOfEnemies;
