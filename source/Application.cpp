@@ -71,6 +71,7 @@ void Application::update(const sf::Int64 &time) {
     if (frags == 4)
         gameOver = true;
 
+    // If PLAYER gets killed-- (ayo go derek!!)
     if (!mPlayer.life)
         gameOver = true;
 
@@ -126,7 +127,9 @@ void Application::render() {
     map.draw(mWindow);
     if (mPlayer.life)
         mWindow.draw(mPlayer.mSprite);
-    if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);
+
+    if (mPlayer.bullet.present) 
+        mWindow.draw(mPlayer.bullet.mSprite);
 
     for (int i(0); i < 1; ++i) {
         if (packOfEnemies[i].bullet.present)
