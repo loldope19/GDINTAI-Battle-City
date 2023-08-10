@@ -9,7 +9,8 @@ private:
     static const int HEIGHT_MAP = 28;
     static const int WIDTH_MAP = 30;
 
-    sf::String *TileMap;
+    sf::String *actualMap;
+    sf::String *TileMap, *TileMap2, *TileMap3;
     sf::Texture mTexture;
     sf::Sprite mSprite;
 

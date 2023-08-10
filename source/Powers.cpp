@@ -1,25 +1,28 @@
 #include "../include/Powers.h"
 
-Powers::Powers(float fX, float fY, PowerType EType) : life(true) {
-    switch (EType) {
-        case PowerType::SPEED_UP:
+Powers::Powers(float fX, float fY, int nPowerType) : life(true) {
+    switch (nPowerType) {
+        case 0:
             mTexture.loadFromFile("media/speedUpSprite.png");
+            pType = PowerType::SPEED_UP;
             break;
-        case PowerType::SPEED_DOWN:
+        case 1:
             mTexture.loadFromFile("media/speedDownSprite.png");
+            pType = PowerType::SPEED_DOWN;
             break;
-        case PowerType::INVINCI_BASE:
+        case 2:
             mTexture.loadFromFile("media/invincibaseSprite.png");
+            pType = PowerType::INVINCI_BASE;
             break;
-        case PowerType::MINES:
+        case 3:
             mTexture.loadFromFile("media/mineSprite.png");
+            pType = PowerType::MINES;
             break;
-        case PowerType::CHAOS:
+        case 4:
             mTexture.loadFromFile("media/chaosSprite.png");
+            pType = PowerType::CHAOS;
             break;
     }
-
-    pType = EType;
 
     mSprite.setTexture(mTexture);
     mSprite.setTextureRect(sf::IntRect(0, 0, 48, 48));

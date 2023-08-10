@@ -13,7 +13,7 @@ public:
     bool life;
     sf::Sprite mSprite;
 
-    Powers(float fX, float fY, PowerType EType);
+    Powers(float fX, float fY, int nPowerType);
     Powers(const Powers&);
 
 };

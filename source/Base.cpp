@@ -3,7 +3,7 @@
 Base::Base(const Base&) {}
 
 Base::Base(float fX, float fY, BaseType EType)
-    : life(true) {
+    : life(true), bInvincible(false) {
     if (EType == BaseType::PLAYER)
         mTexture.loadFromFile("media/baseSprite.png");
     else
@@ -18,4 +18,15 @@ Base::Base(float fX, float fY, BaseType EType)
 
 void Base::setPosition(float fX, float fY) {
     mSprite.setPosition(fX, fY);
+}
+
+void Base::invincible() {
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        bInvincible = false;
+    }
+    else
+        bInvincible = true;
 }

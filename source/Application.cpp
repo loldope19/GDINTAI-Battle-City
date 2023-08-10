@@ -1,16 +1,22 @@
 //#include <SFML/Window/Event.hpp>
 
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "../include/Application.h"
 
 Application::Application()
     : mWindow(sf::VideoMode(720, 672), "Battle City"), gameOver(false), gameStarted(false),
     msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
     msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0) {
+    
+    
 
     sf::Clock clock;
+    sf::Time elapsed;
 
-    packOfEnemies = new Enemy[1]{ /*Enemy(52,31),*/ Enemy(147,391)/*, Enemy(532,391), Enemy(628,31) */};
+    // Enemy Tank
+    pEnemy = new Enemy(147, 391);
 
     // PLAYER BASES
     mBase = new Base(336, 600, Base::BaseType::PLAYER);
@@ -39,8 +45,10 @@ Application::Application()
 
         process_events();
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
             gameStarted = true;
+            startTime = cClock.now();
+        }
 
         if (gameStarted && !gameOver)
             update(time);
@@ -60,57 +68,122 @@ void Application::process_events() {
 }
 
 void Application::update(const sf::Int64 &time) {
-    for (int i(0); i < 1; ++i)
-        if (!packOfEnemies[i].life)
-            ++frags;
-        else {
-            frags = 0;
-            break;
-        }
+    if (!pEnemy->life)
+        ++frags;
+    else {
+        frags = 0;
+    }
 
-    if (frags == 4)
+    if (frags)
         gameOver = true;
 
     // If PLAYER gets killed-- (ayo go derek!!)
     if (!mPlayer.life)
         gameOver = true;
+    
 
-    bool collision;
-    for (int i(0); i < 1; ++i) {
-        collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
-        if (collision)
-            break;
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        // Perform actions that should happen after 15 seconds
+        srand(std::time(0));
+        int nX, nY, nPowerType;
+        do {
+            nX = 2 + (int)std::rand() % 26;
+            nY = 1 + (int)std::rand() % 26;
+            //std::cout << map.get_tile(nY, nX) << " " << map.get_tile(nY + 1, nX) << " " << map.get_tile(nY, nX + 1) << " " << map.get_tile(nY + 1, nX + 1) << std::endl;
+        } while (map.get_tile(nY, nX) != ' ' &&
+                 map.get_tile(nY + 1, nX) != ' ' &&
+                 map.get_tile(nY, nX + 1) != ' ' &&
+                 map.get_tile(nY + 1, nX + 1) != ' ');
+        
+        pPower = new Powers(nX * 24, nY * 24, (int)std::rand() % 5);
+        vecPowers.push_back(pPower);
+        startTime = currentTime;
     }
 
-    if (mPlayer.life)
+    bool collision;
+    collision = mPlayer.mSprite.getGlobalBounds().intersects(pEnemy->mSprite.getGlobalBounds());
+
+    if (mPlayer.life) {
         mPlayer.update(time, map, collision);
 
-    for (int i(0); i < 1; ++i) {
-        if (packOfEnemies[i].life) {
-            packOfEnemies[i].update(time, map, collision);
-
-            if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mPlayer.mSprite.getGlobalBounds())
-                && packOfEnemies[i].bullet.present) {
-                mPlayer.collapse();
-                packOfEnemies[i].bullet.present = false;
-            }
-
-            for (Base* cBase : vecBase) {
-                if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
-                    && packOfEnemies[i].bullet.present && cBase->bType == Base::BaseType::PLAYER) {
-                    cBase->life = false;
-                    gameOver = true;
+        for (Powers* pPowers : vecPowers) {
+            if (mPlayer.mSprite.getGlobalBounds().intersects(pPowers->mSprite.getGlobalBounds())) {
+                switch (pPowers->pType) {
+                    case Powers::PowerType::SPEED_UP:
+                        mPlayer.bPlayerSpeedUp = true;
+                        break;
+                    case Powers::PowerType::SPEED_DOWN:
+                        mPlayer.bPlayerSpeedDown = true;
+                        break;
+                    case Powers::PowerType::INVINCI_BASE: {
+                        mPlayer.bPlayerInvBase = true;
+                        for (Base* pBase : vecBase) {
+                            if (pBase->bType == Base::BaseType::PLAYER)
+                                pBase->startTime = std::chrono::high_resolution_clock::now();
+                        }
+                    }
+                        break;
+                    case Powers::PowerType::MINES:
+                        for (Tank )
+                        break;
+                    case Powers::PowerType::CHAOS:
+                        break;
                 }
+                mPlayer.startTime = std::chrono::high_resolution_clock::now();
+                pPowers->life = false;
             }
+        }
+        
+    }
+    else
+        gameOver = true;
 
-            if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())
-                && mPlayer.bullet.present) {
-                packOfEnemies[i].collapse();
-                mPlayer.bullet.present = false;
-            }
+    if (mPlayer.bPlayerSpeedUp) {
+        mPlayer.speedUp();
+    }
+
+    if (mPlayer.bPlayerSpeedDown) {
+        mPlayer.speedDown();
+    }
+
+    if (mPlayer.bPlayerInvBase) {
+        mPlayer.invinciBase();
+        for (Base* pBase : vecBase) {
+            if (pBase->bType == Base::BaseType::PLAYER)
+                pBase->invincible();
         }
     }
 
+    if (pEnemy->life) {
+        pEnemy->update(time, map, collision);
+
+        if (pEnemy->bullet.mSprite.getGlobalBounds().intersects(mPlayer.mSprite.getGlobalBounds())
+            && pEnemy->bullet.present) {
+            mPlayer.collapse();
+            pEnemy->bullet.present = false;
+        }
+
+        // If ENEMY shoots PLAYER BASE
+        for (Base* cBase : vecBase) {
+            if (pEnemy->bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
+                && pEnemy->bullet.present && (cBase->bType == Base::BaseType::PLAYER)) {
+                cBase->life = false;
+                gameOver = true;
+            }
+        }
+
+        // If PLAYER shoots ENEMY
+        if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(pEnemy->mSprite.getGlobalBounds())
+            && mPlayer.bullet.present) {
+            pEnemy->collapse();
+            mPlayer.bullet.present = false;
+        }
+    }
+
+    // If PLAYER shoots ENEMY BASE
     for (Base* cBase : vecBase) {
         if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
             && mPlayer.bullet.present && cBase->bType == Base::BaseType::ENEMY) {
@@ -132,16 +205,21 @@ void Application::render() {
         mWindow.draw(mPlayer.bullet.mSprite);
 
     for (int i(0); i < 1; ++i) {
-        if (packOfEnemies[i].bullet.present)
-            mWindow.draw(packOfEnemies[i].bullet.mSprite);
+        if (pEnemy->bullet.present)
+            mWindow.draw(pEnemy->bullet.mSprite);
 
-        if (packOfEnemies[i].life)
-            mWindow.draw(packOfEnemies[i].mSprite);
+        if (pEnemy->life)
+            mWindow.draw(pEnemy->mSprite);
     }
 
     for (Base* cBase : vecBase) {
         if (cBase->life)
             mWindow.draw(cBase->mSprite);
+    }
+
+    for (Powers* pPowers : vecPowers) {
+        if (pPowers->life)
+            mWindow.draw(pPowers->mSprite);
     }
 
     if (!gameStarted)

@@ -9,6 +9,7 @@
 #include "source/Map.cpp"
 #include "source/Message.cpp"
 #include "source/Player.cpp"
+#include "source/Powers.cpp"
 #include "source/Tank.cpp"
 
 int main() {

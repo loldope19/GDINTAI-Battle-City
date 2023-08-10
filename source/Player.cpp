@@ -1,6 +1,7 @@
 #include "SFML/Window/Keyboard.hpp"
 #include "../include/Player.h"
 #include "../include/Map.h"
+
 using sf::Keyboard;
 
 Player::Player()
@@ -10,22 +11,22 @@ Player::Player()
 void Player::move(const sf::Int64 &time) {
     if (Keyboard::isKeyPressed(Keyboard::Left)) {
         mDir = 1;
-        mSpeed = 0.12f;
+        mSpeed = initialSpeed;
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Right)) {
         mDir = 0;
-        mSpeed = 0.12f;
+        mSpeed = initialSpeed;
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         mDir = 3;
-        mSpeed = 0.12f;
+        mSpeed = initialSpeed;
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Down)) {
         mDir = 2;
-        mSpeed = 0.12f;
+        mSpeed = initialSpeed;
     }
 
     switch (mDir) {
@@ -72,4 +73,37 @@ void Player::update(const sf::Int64 &time, Map &map, const bool &collision) {
                 bullet.timeBeforeShot = 0.f;
             }
         }
+}
+
+void Player::speedUp() {
+    initialSpeed = 0.24f;
+
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        initialSpeed = 0.12f;
+        bPlayerSpeedUp = false;
+    }
+}
+
+void Player::speedDown() {
+    initialSpeed = 0.06f;
+
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        initialSpeed = 0.12f;
+        bPlayerSpeedDown = false;
+    }
+}
+
+void Player::invinciBase() {
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        bPlayerInvBase = false;
+    }
 }
