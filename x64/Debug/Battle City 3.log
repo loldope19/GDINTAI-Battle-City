@@ -1,0 +1,51 @@
+﻿  Ftp.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\ftp\Ftp.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Network.hpp': No such file or directory
+  Island.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\island\Island.cpp(6,10): fatal  error C1083: Cannot open include file: 'stb_perlin.h': No such file or directory
+  Joystick.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\joystick\Joystick.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  OpenGL.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\opengl\OpenGL.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Pong.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\pong\Pong.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Shader.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\shader\Effect.hpp(7,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Sockets.cpp
+  TCP.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\sockets\TCP.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Network.hpp': No such file or directory
+  UDP.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\sockets\UDP.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Network.hpp': No such file or directory
+  SoundCapture.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\sound-capture\SoundCapture.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Audio.hpp': No such file or directory
+  Sound.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\sound\Sound.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Audio.hpp': No such file or directory
+  Client.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\voip\Client.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Audio.hpp': No such file or directory
+  Server.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\voip\Server.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Audio.hpp': No such file or directory
+  VoIP.cpp
+  Win32.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\win32\Win32.cpp(5,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Window.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\library\sfml-2.5.1\examples\window\Window.cpp(4,10): fatal  error C1083: Cannot open include file: 'SFML/Window.hpp': No such file or directory
+  Main.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Application.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics/RenderWindow.hpp': No such file or directory
+  Application.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\source\Application.cpp(1,10): fatal  error C1083: Cannot open include file: 'SFML/Window/Event.hpp': No such file or directory
+  Base.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Base.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics/Texture.hpp': No such file or directory
+  Bullet.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Bullet.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics/Texture.hpp': No such file or directory
+  Generating Code...
+  Compiling...
+  Enemy.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Tank.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/System/String.hpp': No such file or directory
+  Map.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Map.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/System/String.hpp': No such file or directory
+  Message.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Message.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics/Text.hpp': No such file or directory
+  Player.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\source\Player.cpp(1,10): fatal  error C1083: Cannot open include file: 'SFML/Window/Keyboard.hpp': No such file or directory
+  Tank.cpp
+C:\Users\syd\OneDrive\Documents\GitHub\battle-city3\include\Tank.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/System/String.hpp': No such file or directory
+  Generating Code...
