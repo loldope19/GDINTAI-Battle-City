@@ -24,5 +24,6 @@ public:
 
 public:
     void setPosition(float fX, float fY);
+    sf::Vector2i getPosition();
     void invincible();
 };

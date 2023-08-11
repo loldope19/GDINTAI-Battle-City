@@ -1,6 +1,13 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <SFML/Window.hpp>
+
+#include <iostream>
+#include <iomanip>
+#include <chrono>
+#include <cstdlib>
+#include <thread>
+
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -11,10 +18,10 @@
 class Application : private sf::NonCopyable {
 private:
     std::chrono::high_resolution_clock cClock;
-    std::chrono::seconds duration = std::chrono::seconds(5);
+    std::chrono::seconds duration = std::chrono::seconds(15);       // Power Duration - 15 secs
     std::chrono::time_point<std::chrono::high_resolution_clock> startTime;
     std::chrono::high_resolution_clock::time_point timerStartTime;
-    const std::chrono::seconds timerDuration{120};  // 2 Mins
+    const std::chrono::seconds timerDuration{120};  // Game Duration - 2 Mins
     
     bool gameOver;
     bool gameStarted;
@@ -38,6 +45,9 @@ private:
     Message* msgTimer;
     Message* msgPlayerKills;
     Message* msgEnemyKills;
+
+public:
+    
 
 public:
     Application();

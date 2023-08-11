@@ -20,6 +20,10 @@ void Base::setPosition(float fX, float fY) {
     mSprite.setPosition(fX, fY);
 }
 
+sf::Vector2i Base::getPosition() {
+    return sf::Vector2i(mSprite.getPosition().x, mSprite.getPosition().y);
+}
+
 void Base::invincible() {
     auto currentTime = cClock.now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);

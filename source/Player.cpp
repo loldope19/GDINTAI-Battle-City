@@ -80,6 +80,10 @@ void Player::setPosition(float fX, float fY) {
     mY = fY;
 }
 
+sf::Vector2i Player::getPosition() {
+    return sf::Vector2i(mX, mY);
+}
+
 void Player::speedUp() {
     initialSpeed = 0.24f;
 

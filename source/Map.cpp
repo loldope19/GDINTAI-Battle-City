@@ -130,3 +130,26 @@ void Map::draw(sf::RenderWindow &window) {
             window.draw(mSprite);
         }
 }
+
+std::vector<std::vector<Node>> Map::createGrid(int nRows, int nCols) {
+    std::vector<std::vector<Node>> grid(nRows, std::vector<Node>(nCols));
+
+    for (int i = 0; i < nRows; ++i) {
+        for (int j = 0; j < nCols; ++j) {
+            grid[i][j].x = i;
+            grid[i][j].y = j;
+            grid[i][j].g = 0;
+            grid[i][j].h = 0;
+            grid[i][j].f = grid[i][j].g + grid[i][j].h;
+            grid[i][j].bIsBrick = false;
+            grid[i][j].bIsSteel = false;
+            grid[i][j].parent = nullptr;
+        }
+    }
+
+    return grid;
+}
+
+bool Map::isWithinBounds(int x, int y, int rows, int columns) {      // Checks if the node is still within bounds of the grid
+	return (x >= 0 && x < rows && y >= 0 && y < columns);
+}

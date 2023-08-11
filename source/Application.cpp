@@ -1,10 +1,4 @@
 //#include <SFML/Window/Event.hpp>
-
-#include <iostream>
-#include <iomanip>
-#include <chrono>
-#include <cstdlib>
-#include <thread>
 #include "../include/Application.h"
 
 Application::Application()
@@ -22,7 +16,7 @@ Application::Application()
     msgEnemyKills = new Message(48, 8, "Kills: " + std::to_string(pEnemy->nKills));
     msgPlayerKills = new Message(48, 650, "Kills: " + std::to_string(mPlayer.nKills));
     
-    msgTimer = new Message(552, 8, "00:00");
+    msgTimer = new Message(600, 8, "00:00");
     msgEnemyKills->mStr.setCharacterSize(15);
     msgPlayerKills->mStr.setCharacterSize(15);
     msgTimer->mStr.setCharacterSize(15);
@@ -75,6 +69,13 @@ void Application::process_events() {
         switch (event.type) {
             case sf::Event::Closed:
                 mWindow.close();
+                break;
+
+            case sf::Event::MouseButtonPressed:
+
+                break;
+
+            case sf::Event::MouseButtonReleased:
                 break;
         }
     }
@@ -167,6 +168,18 @@ void Application::update(const sf::Int64 &time) {
     else
         gameOver = true;
 
+    // If PLAYER steps on ENEMY BASE
+    int i = 0;
+    for (Base* cBase : vecBase) {
+        if (mPlayer.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
+            && (cBase->bType == Base::BaseType::ENEMY && !cBase->bInvincible)) {
+            cBase->life = false;
+            pEnemy->nHealth--;
+            vecBase.erase(vecBase.begin() + i);
+        }
+        i++;
+    }
+
     if (mPlayer.bPlayerSpeedUp) {
         mPlayer.speedUp();
     }
@@ -184,7 +197,14 @@ void Application::update(const sf::Int64 &time) {
     }
 
     if (pEnemy->life) {
-        pEnemy->update(time, map, collision);
+        Base* pBase = *vecBase.begin();     // Player Base, always pushed first so we can just get the first thing on the vector
+        for (Base* pBase2 : vecBase) {
+            if (pBase2->bType == Base::BaseType::ENEMY) {
+                // Find an enemy base
+                pEnemy->update(time, map, collision, mPlayer.getPosition(), pBase->getPosition(), pBase2->getPosition());
+                break;
+            }
+        }
 
         // ENEMY Power-Up Effects
         int j = 0;
@@ -242,11 +262,11 @@ void Application::update(const sf::Int64 &time) {
             pEnemy->bullet.present = false;
         }
 
-        // If ENEMY shoots PLAYER BASE
+        // If ENEMY steps on PLAYER BASE
         int i = 0;
         for (Base* cBase : vecBase) {
-            if (pEnemy->bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
-                && pEnemy->bullet.present && (cBase->bType == Base::BaseType::PLAYER && !cBase->bInvincible)) {
+            if (pEnemy->mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
+                && (cBase->bType == Base::BaseType::PLAYER && !cBase->bInvincible)) {
                 cBase->life = false;
                 mPlayer.nHealth--;
                 vecBase.erase(vecBase.begin() + i);
@@ -268,18 +288,6 @@ void Application::update(const sf::Int64 &time) {
             msgPlayerKills->setString("Kills: " + std::to_string(mPlayer.nKills));
             mPlayer.bullet.present = false;
         }
-    }
-
-    // If PLAYER shoots ENEMY BASE
-    int i = 0;
-    for (Base* cBase : vecBase) {
-        if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(cBase->mSprite.getGlobalBounds())
-            && mPlayer.bullet.present && (cBase->bType == Base::BaseType::ENEMY && !cBase->bInvincible)) {
-            cBase->life = false;
-            pEnemy->nHealth--;
-            vecBase.erase(vecBase.begin() + i);
-        }
-        i++;
     }
 
     if (mPlayer.nHealth <= 0)
@@ -328,9 +336,10 @@ void Application::render() {
 
     if (gameOver) {
         msgOver.print(mWindow);
-        if (mPlayer.nHealth == 0)
+
+        if (mPlayer.nHealth < pEnemy->nHealth || mPlayer.nHealth == 0)
             msgLost.print(mWindow);
-        else if (pEnemy->nHealth == 0)
+        else if (pEnemy->nHealth < mPlayer.nHealth || pEnemy->nHealth == 0)
             msgWon.print(mWindow);
         else {
             if (mPlayer.nKills > pEnemy->nKills)
