@@ -56,6 +56,9 @@ Application::Application()
             startTime = cClock.now();
             timerStartTime = std::chrono::high_resolution_clock::now();
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            mWindow.close();
+        }
 
         if (gameStarted && !gameOver)
             update(time);
