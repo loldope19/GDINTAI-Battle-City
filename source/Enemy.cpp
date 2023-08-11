@@ -1,12 +1,12 @@
 #include "../include/Enemy.h"
 
 Enemy::Enemy(const float &x, const float &y)
-    : Tank(x, y, 39, 39, "media/enemySprites.png"), timeBeforeMoving(0.f), timeBeforeShot(0.f) {
+    : Tank(x, y, 39, 39, "media/enemySprites.png", 1), timeBeforeMoving(0.f), timeBeforeShot(0.f), nHealth(3), nKills(0) {
 
 }
 
 void Enemy::move(const sf::Int64 &time) {
-    mSpeed = 0.1f;
+    mSpeed = 0.12f;
     timeBeforeMoving += time;
 
     if (timeBeforeMoving > 1000 + rand() % 501) {
@@ -40,6 +40,11 @@ void Enemy::move(const sf::Int64 &time) {
     mY += mDy * time;
 }
 
+void Enemy::setPosition(float fX, float fY) {
+    mX = fX;
+    mY = fY;
+}
+
 void Enemy::shoot(const float &time) {
     timeBeforeShot += time;
 
@@ -63,4 +68,37 @@ void Enemy::update(const sf::Int64 &time, Map &map, const bool &collision) {
 
     bullet.update(map, time, mX, mY, mDir);
     shoot(time);
+}
+
+void Enemy::speedUp() {
+    mSpeed = 0.24f;
+
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        mSpeed = 0.12f;
+        bEnemySpeedUp = false;
+    }
+}
+
+void Enemy::speedDown() {
+    mSpeed = 0.06f;
+
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        mSpeed = 0.12f;
+        bEnemySpeedDown = false;
+    }
+}
+
+void Enemy::invinciBase() {
+    auto currentTime = cClock.now();
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime);
+
+    if (elapsedTime >= duration) {
+        bEnemyInvBase = false;
+    }
 }

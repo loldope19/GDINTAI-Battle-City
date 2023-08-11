@@ -30,3 +30,5 @@ Powers::Powers(float fX, float fY, int nPowerType) : life(true) {
 }
 
 Powers::Powers(const Powers&) {}
+
+Powers::~Powers() {}

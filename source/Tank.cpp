@@ -1,11 +1,11 @@
 #include "../include/Tank.h"
 #include "../include/Map.h"
 
-Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
+Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file, int nObjID)
     : life(true), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
     mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
     bullet(x, y) {
-
+    this->nObjID = nObjID;
     mTexture.loadFromFile(mFile);
     mSprite.setTexture(mTexture);
     mSprite.setTextureRect(sf::IntRect(78, 39, mWidth, mHeight));
@@ -30,7 +30,7 @@ void Tank::animate(const sf::Int64 &time) {
 void Tank::collapse() {
     life = false;
     bullet.present = false;
-    mSprite.setPosition(0, 0);
+    mSprite.setPosition(fInitialX, fInitialY);
 }
 
 void Tank::map_interaction(Map &map) {
@@ -67,4 +67,8 @@ void Tank::tank_interaction() {
 
     if (mDx < 0.f)
         mX += 0.3f;
+}
+
+void Tank::setPosition(float fX, float fY) {
+    mSprite.setPosition(fX, fY);
 }

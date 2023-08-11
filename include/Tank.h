@@ -9,6 +9,8 @@ class Map;
 class Tank : private sf::NonCopyable  {
 protected:
     float mX, mY, mWidth, mHeight, mDx, mDy, mSpeed;
+    float fInitialX, fInitialY;
+    int nObjID;
     int mDir;
     float mCurrentFrame;
     bool mCollision;
@@ -17,7 +19,7 @@ protected:
     sf::Texture mTexture;
 
 public:
-    explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);
+    explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file, int nObjID);
 
     bool life;
 
@@ -30,4 +32,5 @@ public:
     virtual void move(const sf::Int64 &time) {}
     void map_interaction(Map &map);
     void tank_interaction();
+    virtual void setPosition(float fX, float fY);
 };

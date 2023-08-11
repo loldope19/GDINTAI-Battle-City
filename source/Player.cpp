@@ -5,7 +5,7 @@
 using sf::Keyboard;
 
 Player::Player()
-    : Tank(244, 600, 39, 39, "media/playerSprites.png") {
+    : Tank(244, 600, 39, 39, "media/playerSprites.png", 0), nHealth(3), nKills(0) {
 }
 
 void Player::move(const sf::Int64 &time) {
@@ -73,6 +73,11 @@ void Player::update(const sf::Int64 &time, Map &map, const bool &collision) {
                 bullet.timeBeforeShot = 0.f;
             }
         }
+}
+
+void Player::setPosition(float fX, float fY) {
+    mX = fX;
+    mY = fY;
 }
 
 void Player::speedUp() {

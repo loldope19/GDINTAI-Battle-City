@@ -13,6 +13,8 @@ private:
     std::chrono::high_resolution_clock cClock;
     std::chrono::seconds duration = std::chrono::seconds(5);
     std::chrono::time_point<std::chrono::high_resolution_clock> startTime;
+    std::chrono::high_resolution_clock::time_point timerStartTime;
+    const std::chrono::seconds timerDuration{120};  // 2 Mins
     
     bool gameOver;
     bool gameStarted;
@@ -32,12 +34,10 @@ private:
     Message msgOver;
     Message msgLost;
     Message msgWon;
-
-public:
-    bool bEnemySpeedUp;
-    bool bEnemySpeedDown;
-    bool bEnemyInvBase;
-    bool bEnemyMine;
+    Message msgDraw;
+    Message* msgTimer;
+    Message* msgPlayerKills;
+    Message* msgEnemyKills;
 
 public:
     Application();
@@ -45,4 +45,7 @@ public:
     void process_events();
     void update(const sf::Int64 &time);
     void render();
+
+    void shuffleBase();
+    sf::String intToTime();
 };

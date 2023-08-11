@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 class Message {
-private:
+public:
     float mX, mY;
 
     sf::Font mFont;
@@ -11,6 +11,8 @@ private:
 
 public:
     explicit Message(const float &x, const float &y, const sf::String &str);
+
+    void setString(const sf::String &str);
 
     void print(sf::RenderWindow &window) { window.draw(mStr); }
 };

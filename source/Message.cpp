@@ -10,3 +10,7 @@ Message::Message(const float &x, const float &y, const sf::String &str)
     mStr.setPosition(mX, mY);
     mStr.setCharacterSize(25);
 }
+
+void Message::setString(const sf::String &str) {
+    mStr.setString(str);
+}

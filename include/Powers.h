@@ -16,4 +16,6 @@ public:
     Powers(float fX, float fY, int nPowerType);
     Powers(const Powers&);
 
+    ~Powers();
+
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Window/Keyboard.hpp>
+#include <chrono>
 #include "Tank.h"
 
 class Player : public Tank {
@@ -8,15 +9,14 @@ private:
     std::chrono::seconds duration = std::chrono::seconds(10);
     
     float initialSpeed = 0.12f;
-    int nHealth;
-    int nKills;
 
 public:
     std::chrono::time_point<std::chrono::high_resolution_clock> startTime;
+    int nHealth;
+    int nKills;
     bool bPlayerSpeedUp;
     bool bPlayerSpeedDown;
     bool bPlayerInvBase;
-    bool bPlayerMine;
 
 public:
     Player();
@@ -26,4 +26,5 @@ public:
     void speedUp();
     void speedDown();
     void invinciBase();
+    void setPosition(float fX, float fY);
 };
